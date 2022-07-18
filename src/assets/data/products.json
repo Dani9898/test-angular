@@ -1,0 +1,6 @@
+[
+    {"id": 1, "name": "piatto", "description": "un bel piatto"},
+    {"id": 2, "name": "bicchiere", "description": "un bel bicchiere"},
+    {"id": 3, "name": "forchetta", "description": "una bella forchetta"}
+
+]
