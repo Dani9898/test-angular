@@ -22,19 +22,34 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit() {
 
-    this._productsService.getProducts().subscribe(data => this.products = data);
+
+    // La chiamata a un'observable è asincrona, pertanto se vuoi lavorare con i dati che ti restituisce
+    // l'observable devi farlo all'interno del subscribe. Per evitare di scrivere troppo codice
+    // all'interno della subscribe, puoi create un metodo come ho fatto qui nell'esempio
+    this._productsService.getProducts().subscribe(data => this.onGetProductsSuccess(data));
+  }
+
+  /**
+   * Questo metodo viene eseguito quando i dati sono stati recuperati dal server
+   * (nel nostro caso dal file .json)
+   * @param data Product data
+   */
+  private onGetProductsSuccess(data: IProduct[]): void {
+    this.products = data;
     console.log(this.products);
-    
-    const routeParam = this.route.snapshot.paramMap;
-    const productIdFromRoute = Number(routeParam.get("productId"));
+    const productIdFromRoute = this.getProductId();
     this.product = this.products.find(
       (product) => product.id === productIdFromRoute
     );
-    
   }
 
-  getProductId(){
-   
+  /**
+   * Return the product number
+   * @returns 
+   */
+  private getProductId():number {
+    const routeParam = this.route.snapshot.paramMap;
+    return Number(routeParam.get("productId"));
   }
 
 }
