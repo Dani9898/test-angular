@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from '../products.service';
 import { IProduct } from '../products';
 
@@ -11,18 +11,11 @@ import { IProduct } from '../products';
 })
 export class ProductDetailComponent implements OnInit {
   product: IProduct | undefined;
-  // products: IProduct[] = [ 
-  //   {id: 1, name: "piatto", description: "un bel piatto"},
-  //   {id: 2, name: "bicchiere", description: "un bel bicchiere"},
-  //   {id: 3, name: "forchetta", description: "una bella forchetta"}
-  // ];
   products: IProduct[] = [];
 
-  constructor(private _productsService: ProductsService, private route: ActivatedRoute) { }
+  constructor(private _productsService: ProductsService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-
-
     // La chiamata a un'observable è asincrona, pertanto se vuoi lavorare con i dati che ti restituisce
     // l'observable devi farlo all'interno del subscribe. Per evitare di scrivere troppo codice
     // all'interno della subscribe, puoi create un metodo come ho fatto qui nell'esempio
@@ -34,9 +27,9 @@ export class ProductDetailComponent implements OnInit {
    * (nel nostro caso dal file .json)
    * @param data Product data
    */
+
   private onGetProductsSuccess(data: IProduct[]): void {
     this.products = data;
-    console.log(this.products);
     const productIdFromRoute = this.getProductId();
     this.product = this.products.find(
       (product) => product.id === productIdFromRoute
@@ -48,8 +41,26 @@ export class ProductDetailComponent implements OnInit {
    * @returns 
    */
   private getProductId():number {
-    const routeParam = this.route.snapshot.paramMap;
-    return Number(routeParam.get("productId"));
+    return Number(this.route.snapshot.paramMap.get('productId'))
   }
 
+  goPrevious() {
+    let previousId = this.getProductId() - 1
+    if(previousId === 0)
+      previousId = this.products.length;
+    console.log(previousId);
+    
+    this.router.navigate(["/product", previousId])
+    this.product = this.products.find(product => product.id === previousId)
+  }
+  goNext() {
+    let nextId = this.getProductId() + 1
+    if(nextId > this.products.length)
+      nextId = 1;
+    this.router.navigate(["/product", nextId])
+    this.product = this.products.find(product => product.id === nextId)
+  }
 }
+
+
+

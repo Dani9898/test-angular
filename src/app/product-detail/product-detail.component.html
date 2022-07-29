@@ -1,4 +1,7 @@
-<p>product-detail works!</p>
+
 <div *ngIf="product">
     {{product.description}}
 </div>
+
+<button (click)="goPrevious()">Previous</button>
+<button (click)="goNext()">Next</button>
