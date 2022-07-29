@@ -1,6 +1,6 @@
 [
-    {"id": 1, "name": "piatto", "description": "un bel piatto"},
-    {"id": 2, "name": "bicchiere", "description": "un bel bicchiere"},
-    {"id": 3, "name": "forchetta", "description": "una bella forchetta"}
+    {"id": 1, "name": "piatto", "description": "un bel piatto", "inventor": "Daniele"},
+    {"id": 2, "name": "bicchiere", "description": "un bel bicchiere", "inventor": "Matteo"},
+    {"id": 3, "name": "forchetta", "description": "una bella forchetta", "inventor": "Marco"}
 
 ]

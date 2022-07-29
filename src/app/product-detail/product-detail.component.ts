@@ -47,19 +47,23 @@ export class ProductDetailComponent implements OnInit {
   goPrevious() {
     let previousId = this.getProductId() - 1
     if(previousId === 0)
-      previousId = this.products.length;
-    console.log(previousId);
-    
-    this.router.navigate(["/product", previousId])
+      previousId = this.products.length;    
+
+    this.router.navigate(["/products", previousId])
     this.product = this.products.find(product => product.id === previousId)
   }
   goNext() {
     let nextId = this.getProductId() + 1
     if(nextId > this.products.length)
       nextId = 1;
-    this.router.navigate(["/product", nextId])
+    this.router.navigate(["/products", nextId])
     this.product = this.products.find(product => product.id === nextId)
   }
+  goBack(){
+    this.router.navigate(["../"], {relativeTo: this.route})
+  }
+  
+
 }
 
 

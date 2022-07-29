@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ProductInventorComponent } from './product-inventor/product-inventor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductsComponent,
     ProductDetailComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ProductInventorComponent
   ],
   imports: [
     BrowserModule,
