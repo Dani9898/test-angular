@@ -40,29 +40,29 @@ export class ProductDetailComponent implements OnInit {
    * Return the product number
    * @returns 
    */
-  private getProductId():number {
+  private getProductId(): number {
     return Number(this.route.snapshot.paramMap.get('productId'))
   }
 
   goPrevious() {
     let previousId = this.getProductId() - 1
-    if(previousId === 0)
-      previousId = this.products.length;    
+    if (previousId === 0)
+      previousId = this.products.length;
 
-    this.router.navigate(["/products", previousId])
+    this.router.navigate([`../${this.route.snapshot.url[0].path}/${previousId}`], { relativeTo: this.route.parent })
     this.product = this.products.find(product => product.id === previousId)
   }
   goNext() {
     let nextId = this.getProductId() + 1
-    if(nextId > this.products.length)
+    if (nextId > this.products.length)
       nextId = 1;
-    this.router.navigate(["/products", nextId])
+    this.router.navigate([`../${this.route.snapshot.url[0].path}/${nextId}`], { relativeTo: this.route.parent })
     this.product = this.products.find(product => product.id === nextId)
   }
-  goBack(){
-    this.router.navigate(["../"], {relativeTo: this.route})
+  goBack() {
+    this.router.navigate(["../"], { relativeTo: this.route })
   }
-  
+
 
 }
 
